@@ -1,0 +1,2 @@
+eurostat==0.2.3
+pandas==0.25.3
