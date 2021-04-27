@@ -1,2 +1,4 @@
 eurostat==0.2.3
 pandas==0.25.3
+altair==4.1.0
+streamlit==0.80.0
