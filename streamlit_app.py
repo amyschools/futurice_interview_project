@@ -13,6 +13,7 @@ st.text(
 )
 
 
+@st.cache(hash_funcs={sqlite3.Connection: id})
 def load_country_data(db_connection: sqlite3.Connection, filename: str) -> None:
     """
     Load a mapping of country names and country labels into the db to use for query joins,
@@ -23,6 +24,7 @@ def load_country_data(db_connection: sqlite3.Connection, filename: str) -> None:
     df.to_sql("country_mapping", db_connection, if_exists="replace")
 
 
+@st.cache(hash_funcs={sqlite3.Connection: id})
 def load_country_gdp(db_connection: sqlite3.Connection, filename: str) -> None:
     """
     Load a CSV file with GDP in billions per year per country.
@@ -35,6 +37,7 @@ def load_country_gdp(db_connection: sqlite3.Connection, filename: str) -> None:
     df.to_sql("gdp_by_country", db_connection, if_exists="replace", index=False)
 
 
+@st.cache(hash_funcs={sqlite3.Connection: id})
 def load_percent_ict_of_gdp(db_connection: sqlite3.Connection) -> None:
     """
     Request the json-stat data from eurostat for the percentage of GDP that is created by the ICT sector.
@@ -48,6 +51,7 @@ def load_percent_ict_of_gdp(db_connection: sqlite3.Connection) -> None:
     df.to_sql("percent_ict_of_gdp", db_connection, if_exists="replace", index=False)
 
 
+@st.cache(hash_funcs={sqlite3.Connection: id})
 def load_percent_ent_using_cloud_computing(db_connection: sqlite3.Connection) -> None:
     """
     Request the json-stat data from eurostat for the percentage of cloud computing services used by enterprise companies.
@@ -66,6 +70,7 @@ def load_percent_ent_using_cloud_computing(db_connection: sqlite3.Connection) ->
     df.to_sql("percent_ent_using_cc", db_connection, if_exists="replace", index=False)
 
 
+@st.cache(hash_funcs={sqlite3.Connection: id}, suppress_st_warning=True)
 def calculate_and_display_results(db_connection: sqlite3.Connection) -> None:
     """
     Query the sqlite db and output the results to a CSV file.
@@ -92,6 +97,7 @@ def calculate_and_display_results(db_connection: sqlite3.Connection) -> None:
             tooltip=["attractiveness_score", "country_name"]
         )
     )
+
     st.altair_chart(c, use_container_width=True)
 
 st.text("Made by Amy Schools")
