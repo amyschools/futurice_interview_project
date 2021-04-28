@@ -1,6 +1,6 @@
 # New Office Finder
 
-### View the results! https://share.streamlit.io/amyschools/new_office_finder
+View the results! https://share.streamlit.io/amyschools/new_office_finder
 
 
 This python script was created as part of an interview take-home project for a digital consulting company. It takes in three sources of data and uses them to find the best potential locations for a new office. 
@@ -25,15 +25,15 @@ To access the Eurostat database, I used the python library <a href="https://pypi
  to request the data by using the internal code for that topic. This library allows the user to access a pandas dataframe directly without having to convert
 it from it's original json-stat state.
 
-To create a chart showing the data, and deploy my python script as a very small web app, I used <a href="streamlit.io">Streamlit</a> with an interactive bar chart from the data visualization library Altair. You can hover over the bars to see the exact score for that country.
+To create a chart showing the data, and deploy my python script as a very small web app, I used <a href="streamlit.io">Streamlit</a> with an interactive bar chart from the data visualization library Altair. You can hover over the bars to see the exact score for that country. I used built-in caching functionality so that the SQLlite tables would not be rebuilt every time the script is run via Streamlit.
 
 
 ### Ideas for "productionizing" this script:
 
 1. Provide the output in a different format such as an API endpoint that provides JSON to be served to a front end client that will
 display it as part of a more cohesive web app.
-2. Use SQLAlchemy along with with SQLite to persist the database and expose the table schemata to a models.py file. Currently,
-the tables in this script are meant to be temporary and rebuilt every time, but this wouldn't be efficient in the long term, or if the user wanted to do more complex analysis.
+2. Use SQLAlchemy along with with SQLite to persist the database and expose the models. Currently,
+the tables in this script are meant to be temporary and rebuilt every time, but this wouldn't be efficient in the long term, or if the user wanted to do more complex analysis. I would also add foreign keys and define the table schemata in a cleaner way in a production app.
 3. Move the db from SQLlite to a persistent relational db, and define the table schemas and relations more cleanly. The DB could be hosted on AWS for cost savings.
 4. Move the script to AWS as a Lambda that can be run as-needed or scheduled to run at certain intervals.
 5. Add infrastructure - tests, logging, monitoring.
@@ -52,5 +52,9 @@ attractiveness score. Look into using eurostat or another source for this data, 
 such as the Netherlands and Portugal.
 
 
+
+Results (just in case there is a problem with the deployed app):
+
+<img width="684" alt="Screen Shot 2021-04-28 at 3 19 19 PM" src="https://user-images.githubusercontent.com/19355893/116480515-4e486600-a836-11eb-9373-8b812be9486d.png">
 
 
