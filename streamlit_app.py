@@ -100,6 +100,7 @@ def calculate_and_display_results(db_connection: sqlite3.Connection) -> None:
 
     st.altair_chart(c, use_container_width=True)
 
+
 st.text("Made by Amy Schools")
 
 
@@ -110,3 +111,5 @@ if __name__ == "__main__":
         load_percent_ict_of_gdp(conn)
         load_percent_ent_using_cloud_computing(conn)
         calculate_and_display_results(conn)
+
+    conn.close()
